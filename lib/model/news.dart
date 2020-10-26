@@ -15,13 +15,13 @@ class News {
 
   News(
       {Source source,
-        String author,
-        String title,
-        String description,
-        String url,
-        String urlToImage,
-        String publishedAt,
-        String content}) {
+      String author,
+      String title,
+      String description,
+      String url,
+      String urlToImage,
+      String publishedAt,
+      String content}) {
     this._source = source;
     this._author = author;
     this._title = title;
@@ -33,25 +33,40 @@ class News {
   }
 
   Source get source => _source;
+
   set source(Source source) => _source = source;
+
   String get author => _author;
+
   set author(String author) => _author = author;
+
   String get title => _title;
+
   set title(String title) => _title = title;
+
   String get description => _description;
+
   set description(String description) => _description = description;
+
   String get url => _url;
+
   set url(String url) => _url = url;
+
   String get urlToImage => _urlToImage;
+
   set urlToImage(String urlToImage) => _urlToImage = urlToImage;
+
   String get publishedAt => _publishedAt;
+
   set publishedAt(String publishedAt) => _publishedAt = publishedAt;
+
   String get content => _content;
+
   set content(String content) => _content = content;
 
   News.fromJson(Map<String, dynamic> json) {
     _source =
-    json['source'] != null ? new Source.fromJson(json['source']) : null;
+        json['source'] != null ? new Source.fromJson(json['source']) : null;
     _author = json['author'];
     _title = json['title'];
     _description = json['description'];
@@ -87,8 +102,11 @@ class Source {
   }
 
   String get id => _id;
+
   set id(String id) => _id = id;
+
   String get name => _name;
+
   set name(String name) => _name = name;
 
   Source.fromJson(Map<String, dynamic> json) {

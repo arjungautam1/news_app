@@ -20,8 +20,7 @@ class _NewsScreenState extends State<NewsScreen> {
   getNewsData() async {
     try {
       var url =
-          'http://newsapi.org/v2/everything?q=bitcoin&from=2020-09-26&sortBy=publishedAt&apiKey=4dffbce6213e42b0aa14f0887866d894';
-
+          'http://newsapi.org/v2/top-headlines?country=in&category=sports&apiKey=4dffbce6213e42b0aa14f0887866d894';
       // Await the http get response, then decode the json-formatted response.
       var response = await http.get(url);
       if (response.statusCode == 200) {
@@ -29,10 +28,10 @@ class _NewsScreenState extends State<NewsScreen> {
 
         // log(jsonResponse['articles']);
         jsonResponse['articles'].forEach((v) {
-          log(v.toString());
+          newsData.add(News.fromJson(v));
         });
         log("Api call is success");
-        log(response.body);
+        log(newsData[1].author);
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
@@ -56,12 +55,20 @@ class _NewsScreenState extends State<NewsScreen> {
           title: Text('News Screen'),
         ),
         body: Center(
-          child: Text(
-            "Hello this is news screen page. ",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 22,
-            ),
+          child: ListView.separated(
+            padding: const EdgeInsets.all(8),
+            itemCount: newsData.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                height: 50,
+                color: Colors.black12,
+                child: Center(
+                  child: Text(newsData[index].title),
+                ),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+                const Divider(),
           ),
         ),
       ),
