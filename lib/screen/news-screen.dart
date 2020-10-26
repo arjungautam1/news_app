@@ -2,10 +2,12 @@
  *Date : 10/26/20
  *Time : 4:56 PM
  */
+import 'dart:convert' as convert;
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:news_api/model/news.dart';
 
 class NewsScreen extends StatefulWidget {
   @override
@@ -13,6 +15,8 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
+  List<News> newsData = new List();
+
   getNewsData() async {
     try {
       var url =
@@ -21,9 +25,14 @@ class _NewsScreenState extends State<NewsScreen> {
       // Await the http get response, then decode the json-formatted response.
       var response = await http.get(url);
       if (response.statusCode == 200) {
-        // var jsonResponse = convert.jsonDecode(response.body);
-        // var itemCount = jsonResponse['totalItems'];
+        var jsonResponse = convert.jsonDecode(response.body);
+
+        // log(jsonResponse['articles']);
+        jsonResponse['articles'].forEach((v) {
+          log(v.toString());
+        });
         log("Api call is success");
+        log(response.body);
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
