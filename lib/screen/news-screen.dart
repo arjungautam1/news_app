@@ -3,7 +3,6 @@
  *Time : 4:56 PM
  */
 import 'dart:convert' as convert;
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -17,6 +16,7 @@ class NewsScreen extends StatefulWidget {
 
 class _NewsScreenState extends State<NewsScreen> {
   List<News> newsData = new List();
+  bool isLoading = true;
 
   getNewsData() async {
     try {
@@ -31,8 +31,9 @@ class _NewsScreenState extends State<NewsScreen> {
         jsonResponse['articles'].forEach((v) {
           newsData.add(News.fromJson(v));
         });
-        log("Api call is success");
-        log(newsData[1].description);
+        //  set state
+
+        isLoading = false;
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
@@ -55,27 +56,28 @@ class _NewsScreenState extends State<NewsScreen> {
         appBar: AppBar(
           title: Text('News Screen'),
         ),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical:5.0,horizontal: 5.0),
-            child: ListView.separated(
-              padding: const EdgeInsets.all(8),
-              itemCount: newsData.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom:8.0,top: 8.0),
-                  child: NewsWidget(
-                    news: newsData[index],
-                  ),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) =>
-                  const Divider(
+        body: isLoading
+            ? Center(child: CircularProgressIndicator())
+            : Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
+                child: ListView.separated(
+                  padding: const EdgeInsets.all(8),
+                  itemCount: newsData.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
+                      child: NewsWidget(
+                        news: newsData[index],
+                      ),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const Divider(
                     color: Colors.grey,
                   ),
-            ),
-          ),
-        ),
+                ),
+              ),
       ),
     );
   }

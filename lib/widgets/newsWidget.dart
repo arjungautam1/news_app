@@ -25,6 +25,16 @@ class NewsWidget extends StatelessWidget {
       return SizedBox.shrink();
     }
   }
+  getAuthor(String author){
+    if(author !=null){
+      return Text(author,style: TextStyle(
+        color: Colors.grey
+      ),);
+    }
+    else{
+      return SizedBox.shrink();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +45,17 @@ class NewsWidget extends StatelessWidget {
           news.title,
           style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
         ),
+        Padding(
+          padding: const EdgeInsets.only(top:8.0),
+          child: Row(
+            children: [
+              getAuthor(news.author),
+              Text(' , '),
+              Text(news.publishedAt,style: TextStyle(color: Colors.grey),),
+            ],
+          ),
+        ),
+
         Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Row(
