@@ -24,24 +24,18 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text("News Home"),
-      ),
-      // body: NewsScreen(),
-      floatingActionButton: InkWell(
-        onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (BuildContext context) {
-            return NewsScreen();
-          }));
-        },
-        child: FloatingActionButton(
-          child: Icon(Icons.add_comment),
-        ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+    return  NewsScreen();
+    //   // floatingActionButton: InkWell(
+    //   //   onTap: () {
+    //   //     Navigator.push(context,
+    //   //         MaterialPageRoute(builder: (BuildContext context) {
+    //   //       return NewsScreen();
+    //   //     }));
+    //   //   },
+    //   //   child: FloatingActionButton(
+    //   //     child: Icon(Icons.add_comment),
+    //   //   ),
+    //   ), // This trailing comma makes auto-formatting nicer for build methods.
+    // );
   }
 }

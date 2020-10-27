@@ -17,21 +17,22 @@ class NewsWidget extends StatelessWidget {
       return SizedBox.shrink();
     }
   }
-  getImage(String imageUrl){
-    if(imageUrl !=null){
+
+  getImage(String imageUrl) {
+    if (imageUrl != null) {
       return Image.network(imageUrl);
-    }
-    else{
+    } else {
       return SizedBox.shrink();
     }
   }
-  getAuthor(String author){
-    if(author !=null){
-      return Text(author,style: TextStyle(
-        color: Colors.grey
-      ),);
-    }
-    else{
+
+  getAuthor(String author) {
+    if (author != null) {
+      return Text(
+        author,
+        style: TextStyle(color: Colors.grey),
+      );
+    } else {
       return SizedBox.shrink();
     }
   }
@@ -46,16 +47,18 @@ class NewsWidget extends StatelessWidget {
           style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
         ),
         Padding(
-          padding: const EdgeInsets.only(top:8.0),
+          padding: const EdgeInsets.only(top: 8.0),
           child: Row(
             children: [
               getAuthor(news.author),
               Text(' , '),
-              Text(news.publishedAt,style: TextStyle(color: Colors.grey),),
+              Text(
+                news.publishedAt,
+                style: TextStyle(color: Colors.grey),
+              ),
             ],
           ),
         ),
-
         Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Row(
@@ -66,7 +69,7 @@ class NewsWidget extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8.0),
                     child: getDescription(news.description),
                   )),
-              Expanded(flex: 1, child:getImage(news.urlToImage)),
+              Expanded(flex: 1, child: getImage(news.urlToImage)),
             ],
           ),
         ),

@@ -7,6 +7,7 @@ import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:news_api/model/news.dart';
+import 'package:news_api/screen/newsDetailScreen.dart';
 import 'package:news_api/widgets/newsWidget.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -32,8 +33,11 @@ class _NewsScreenState extends State<NewsScreen> {
           newsData.add(News.fromJson(v));
         });
         //  set state
-
         isLoading = false;
+        setState(() {
+
+        });
+
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
@@ -67,8 +71,16 @@ class _NewsScreenState extends State<NewsScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
-                      child: NewsWidget(
-                        news: newsData[index],
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return NewsDetailScreen(news: newsData[index]);
+                          }));
+                        },
+                        child: NewsWidget(
+                          news: newsData[index],
+                        ),
                       ),
                     );
                   },
