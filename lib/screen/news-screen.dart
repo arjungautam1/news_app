@@ -8,6 +8,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:news_api/model/news.dart';
+import 'package:news_api/widgets/newsWidget.dart';
 
 class NewsScreen extends StatefulWidget {
   @override
@@ -31,12 +32,12 @@ class _NewsScreenState extends State<NewsScreen> {
           newsData.add(News.fromJson(v));
         });
         log("Api call is success");
-        log(newsData[1].author);
+        log(newsData[1].description);
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
     } catch (e) {
-      log(e);
+      // log(e);
     }
   }
 
@@ -55,20 +56,24 @@ class _NewsScreenState extends State<NewsScreen> {
           title: Text('News Screen'),
         ),
         body: Center(
-          child: ListView.separated(
-            padding: const EdgeInsets.all(8),
-            itemCount: newsData.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                height: 50,
-                color: Colors.black12,
-                child: Center(
-                  child: Text(newsData[index].title),
-                ),
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical:5.0,horizontal: 5.0),
+            child: ListView.separated(
+              padding: const EdgeInsets.all(8),
+              itemCount: newsData.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom:8.0,top: 8.0),
+                  child: NewsWidget(
+                    news: newsData[index],
+                  ),
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(
+                    color: Colors.grey,
+                  ),
+            ),
           ),
         ),
       ),
