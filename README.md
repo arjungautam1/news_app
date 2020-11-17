@@ -9,3 +9,6 @@ News app shows news of football and cricket using flutter .
 
 # News Detail
 <img src="lib/assets/sc2.png" width=300 >
+
+# API Source 
+https://newsapi.org/
