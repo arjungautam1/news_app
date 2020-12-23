@@ -1,6 +1,6 @@
 # News App 
 
-News app shows news of football and cricket using flutter .
+News app shows news of football and cricket made using flutter and api from https://newsapi.org/ 
 
 # Demo
 # News Screen
